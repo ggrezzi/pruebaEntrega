@@ -1,0 +1,52 @@
+<h4>Products Page:</h4>
+<a href="/products">Products refresh</a>
+<hr>
+
+
+{{#each products}}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <p class="card-text">Codigo:{{this.code}}</p>
+            <p class="card-text">Precio:{{this.price}}</p>
+            <p class="card-text">Stock:{{this.stock}}</p>
+            <button class="button">Agregar al Carrito</buton>
+        </div>
+    </div>
+    <br>
+{{/each}}
+
+{{#if limite}}
+    <a href="/products?page=1&limit={{limite}}">Pág.1</a>
+
+    {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}&limit={{limite}}">Prev.Pág.</a>
+    {{else}}
+        <span>Prev.Pág.</span>
+    {{/if}}
+
+    {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}&limit={{limite}}">Next.Pág.</a>
+    {{else}}
+        <span>Next.Pág.</span>
+    {{/if}}
+
+    <a href="/products?page={{totalPages}}&limit={{limite}}">Ult.Pág</a>
+{{else}}
+    <a href="/products?page=1">Pág.1</a>
+
+    {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}">Prev.Pág.</a>
+    {{else}}
+        <span>Prev.Pág.</span>
+    {{/if}}
+
+    {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}">Next.Pág.</a>
+    {{else}}
+        <span>Next.Pág.</span>
+    {{/if}}
+
+    <a href="/products?page={{totalPages}}">Ult.Pág</a>
+{{/if}}
