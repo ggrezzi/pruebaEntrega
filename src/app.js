@@ -10,6 +10,7 @@ import { router as productRouter} from './routes/products.router.js'
 import { initPassport } from './config/passport.config.js';
 import passport from 'passport';
 import { config } from './config/config.js';
+import { middLog } from './utils.js';
 
 const PORT=config.PORT;
 
@@ -23,9 +24,12 @@ app.use('/products',productRouter)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+
 app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname,'/public')));
+
+app.use (middLog)
 initPassport()
 app.use(passport.initialize())
 
