@@ -3,6 +3,7 @@ import { productsModelo } from "../DAO/models/products.modelo.js";
 import { productsService } from "../services/products.service.js";
 
 async function getProducts (req,res){
+
     try {
         let   limite = parseInt(req.query.limit);
         if(!limite) limite=10
@@ -58,10 +59,7 @@ async function getProducts (req,res){
 }
 
 async function getProductById (req,res){
-    
     let  pid = req.params.pid.replace("pid=", "");
-    console.log(pid)
-    
     try{
         let product=await productsService.getProductById(pid)
         return res.status(200).json({product})
@@ -73,4 +71,28 @@ async function getProductById (req,res){
 }
 
 
-export default {getProducts,getProductById}
+
+async function createProduct (req,res){
+
+    let nuevoProducto = req.body
+    
+    let resultado = await productsService.createProducts(nuevoProducto)
+    return res.status(400).json({resultado})
+};
+
+async function updateProduct (req,res){
+
+    let  pid = req.params.pid.replace("pid=", "");
+    let update=req.body 
+
+    try{
+        let resultado = await productsModelo.updateOne({_id:pid},{$set: {title:update.title}})
+        return res.status(200).json({resultado})
+    } catch(error){
+        return res.status(500).json({
+            error:"Error al actualizar el proucto", detalle:error.message
+        })
+    }
+};
+
+export default {getProducts,getProductById,createProduct,updateProduct}

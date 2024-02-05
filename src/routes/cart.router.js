@@ -1,9 +1,8 @@
 
 import { Router } from "express";
 export const router=Router()
-import { productsModelo } from "../dao/models/products.modelo.js";
 import { cartsModelo } from "../DAO/models/carts.modelo.js";
-
+import { productsModelo } from "../DAO/models/products.modelo.js";
 
 router.post('/:pid',async (req,res)=>{
     

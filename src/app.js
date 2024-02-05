@@ -11,6 +11,7 @@ import { initPassport } from './config/passport.config.js';
 import passport from 'passport';
 import { config } from './config/config.js';
 import { middLog } from './utils.js';
+import {router as cartRouter} from './routes/cart.router.js'
 
 const PORT=config.PORT;
 
@@ -35,6 +36,8 @@ app.use(passport.initialize())
 
 app.use('/', vistasRouter)
 app.use('/api/sessions', sessionsRouter)
+app.use('/api/products', productRouter)
+app.use('/api/carts', cartRouter)
 
 
 const server=app.listen(PORT,()=>{
