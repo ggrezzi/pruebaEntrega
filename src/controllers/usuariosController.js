@@ -1,4 +1,4 @@
-import { usuariosService } from "../../services/usuarios.service.js"
+import { usuariosService } from "../services/usuarios.service.js"
 
 
 async function getUsers(req,res){
@@ -20,7 +20,7 @@ async function getUsers(req,res){
 async function getUserById(req,res){
 
     try {
-        let usuario=await usuariosService.getUserById(req.params.id)
+        let usuario=await usuariosService.getUserById(req.params.uid)
     
         return res.status(200).json({
             usuario
@@ -53,16 +53,13 @@ async function getUserByEmail(req,res){
 
 
 async function postUser(req, res){
+
     let {nombre, email}=req.body
     if(!nombre || !email) return res.status(400).json({error:"Complete todos los datos"})
-
-    
     try {
-        // validar usuario existente...
         let usuarios=await usuariosService.getUsers()
         let existe=usuarios.find(u=>u.email===email)
         if(existe) return res.status(400).json({error:`Usuario con email ${email} existente en BD`})
-
         let usuarioNuevo=await usuariosService.createUser(nombre, email)
         return res.status(201).json({usuarioNuevo})
     } catch (error) {

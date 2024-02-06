@@ -1,13 +1,10 @@
 
 import { Router } from "express";
-export const router=Router()
 import { cartsModelo } from "../DAO/models/carts.modelo.js";
 import { productsModelo } from "../DAO/models/products.modelo.js";
+export const router=Router()
 
 router.post('/:pid',async (req,res)=>{
-    
-    //debe crear un carrito nuevo
-
     let pid=req.params.pid
     let newCart={
         products:[],

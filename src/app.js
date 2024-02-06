@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { router as vistasRouter } from './routes/vistas.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import { router as productRouter} from './routes/products.router.js'
+import { router as usersRouter} from './routes/usuarios.router.js'
 import { initPassport } from './config/passport.config.js';
 import passport from 'passport';
 import { config } from './config/config.js';
@@ -37,6 +38,7 @@ app.use(passport.initialize())
 app.use('/', vistasRouter)
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/products', productRouter)
+app.use('/api/users', usersRouter)
 app.use('/api/carts', cartRouter)
 
 

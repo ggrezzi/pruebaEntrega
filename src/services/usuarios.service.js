@@ -1,4 +1,4 @@
-import { UsuariosMongoDAO as DAO} from "../DAO/model/usuariosMongoDAO.js";
+import { UsuariosMongoDAO as DAO} from "../DAO/models/usuariosMongoDAO.js";
 
 class UsuariosService{
     constructor(dao){
@@ -6,7 +6,7 @@ class UsuariosService{
     }
 
     async getUsers(){
-        return await this.dao.get()
+        return await this.dao.getAll()
     }
 
     async getUserById(uid){

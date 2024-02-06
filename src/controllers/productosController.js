@@ -40,6 +40,7 @@ async function getProducts (req,res){
                 hasNextPage,
                 prevPage,
                 nextPage } = products
+
             res.status(200).render('products',{
                 products:products.docs,
                 totalPages,
@@ -75,24 +76,50 @@ async function getProductById (req,res){
 async function createProduct (req,res){
 
     let nuevoProducto = req.body
+    try{
+        let resultado = await productsService.createProducts(nuevoProducto)
+        return res.status(400).json({resultado})
+    }
+    catch (error)
+    {
+        return res.status(500).json({
+            error:"Error al crear el proucto", detalle:error.message
+        })
+    }
     
-    let resultado = await productsService.createProducts(nuevoProducto)
-    return res.status(400).json({resultado})
 };
 
 async function updateProduct (req,res){
 
-    let  pid = req.params.pid.replace("pid=", "");
-    let update=req.body 
+        let  pid = req.params.pid.replace("pid=", "");
+        let update=req.body 
+        console.log(update)
+        try{
+            let resultado = await productsModelo.updateOne({_id:pid},update)
+            return res.status(200).json({resultado})
+        } catch(error){
+            return res.status(500).json({
+                error:"Error al actualizar el proucto", detalle:error.message
+            })
+        }
+};
 
+async function deleteProduct (req,res){
+    let  pid = req.params.pid.replace("pid=", "");
+    let resultado = await productsModelo.deleteOne({_id:pid})
     try{
-        let resultado = await productsModelo.updateOne({_id:pid},{$set: {title:update.title}})
+        let resultado = await productsModelo.deleteOne({_id:pid})
+        if (resultado.deletedCount==0 ) {
+            return res.status(500).json({
+                error:"Error al eliminar el proucto", detalle:"Producto no encontrado"
+            }) 
+        }
         return res.status(200).json({resultado})
     } catch(error){
         return res.status(500).json({
-            error:"Error al actualizar el proucto", detalle:error.message
+            error:"Error al eliminar el proucto", detalle:error.message
         })
     }
 };
 
-export default {getProducts,getProductById,createProduct,updateProduct}
+export default {getProducts,getProductById,createProduct,updateProduct,deleteProduct}

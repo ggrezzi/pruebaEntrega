@@ -11,7 +11,6 @@ import { config } from "../../config/config.js";
 
 export class CartsMongoDAO{
     constructor(){
-
     }
     async get(filtro={}){
         if (filtro["_id"]){

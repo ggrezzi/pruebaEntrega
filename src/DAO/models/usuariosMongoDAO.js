@@ -8,31 +8,41 @@ import { config } from "../../config/config.js";
         console.log(`Error al conectarse con el servidor de BD: ${err}`)
     }
 
-
-
 export class UsuariosMongoDAO{
     constructor(){
 
     }
 
+    async getAll(){
+        return await usuariosModelo.find()
+    }
+
     async get(filtro={}){
+        if (!filtro._id =="" ){
+        filtro._id = filtro._id.replace("uid=", "")
         if (filtro["_id"]){
             if (!mongoose.Types.ObjectId.isValid(filtro["_id"])){
                 throw new Error('Id de usario invalida')
             }
-        }
-        return await usuariosModelo.find(filtro)
+        }}
 
+        else if  (!filtro.email =="" ){
+            if (filtro["email"]){
+                if (!mongoose.Types.ObjectId.isValid(filtro["email"])){
+                    throw new Error('email invalido')
+                }
+            }}
+
+        return await usuariosModelo.find(filtro)
     }
 
     async create(user){
         return await usuariosModelo.create(user)
     }
-    async update(){
-
+    async update(user){
+        return await usuariosModelo.updateOne({_id:user._id},user)
     }
-
     async delete(){
-        
+        return await usuariosModelo.deleteOne(user)
     }
 }
