@@ -17,10 +17,8 @@ class UsuariosService{
         return await this.dao.get({email})
     }
 
-    async createUser(nombre, email){
-
-        return await this.dao.create({nombre, email})
-
+    async createUser(user){
+        return await this.dao.create(user)
     }
 }
 

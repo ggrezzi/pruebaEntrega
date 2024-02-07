@@ -54,13 +54,14 @@ async function getUserByEmail(req,res){
 
 async function postUser(req, res){
 
-    let {nombre, email}=req.body
-    if(!nombre || !email) return res.status(400).json({error:"Complete todos los datos"})
+    let newUser = req.body
+
+    if(!newUser.nombre || !newUser.email) return res.status(400).json({error:"Complete todos los datos"})
     try {
         let usuarios=await usuariosService.getUsers()
-        let existe=usuarios.find(u=>u.email===email)
-        if(existe) return res.status(400).json({error:`Usuario con email ${email} existente en BD`})
-        let usuarioNuevo=await usuariosService.createUser(nombre, email)
+        let existe=usuarios.find(u=>u.email===newUser.email)
+        if(existe) return res.status(400).json({error:`Usuario con email ${newUser.email} existente en BD`})
+        let usuarioNuevo=await usuariosService.createUser(newUser)
         return res.status(201).json({usuarioNuevo})
     } catch (error) {
         return res.status(500).json({

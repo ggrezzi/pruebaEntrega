@@ -40,6 +40,7 @@ export class UsuariosMongoDAO{
         return await usuariosModelo.create(user)
     }
     async update(user){
+        
         return await usuariosModelo.updateOne({_id:user._id},user)
     }
     async delete(){
