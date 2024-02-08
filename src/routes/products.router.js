@@ -11,4 +11,3 @@ router.post('/', productosController.createProduct)
 router.put('/:pid',productosController.updateProduct)
 
 router.delete('/:pid', productosController.deleteProduct)
-

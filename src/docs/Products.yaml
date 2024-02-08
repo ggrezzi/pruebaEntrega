@@ -1,0 +1,94 @@
+paths:
+  /api/products/{pid}:
+    get:
+      summary: Obtiene el producto indicado con el id en el parametro
+      tags:
+        - PRoducts
+      responses:
+        "200":
+          description: Producto obtenido corectamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+    post:
+      summary: Crea un producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/createProduct'
+      responses:
+        "201":
+          description: PRoducto creado
+        "400":
+          description: Info erronea o faltante
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: string
+          description: titulo del producto
+        description:
+          type: string
+          description: Desctipcion del producto
+        price:
+          type: int
+          description: precio del producto
+        thumbnail: 
+          type: string
+          description: nombre del thumbnail
+        code: 
+          type: string
+          description: codigo del producto
+        stock: 
+          type: int
+          description: cantidad de stock del producto
+      example:
+        _id: ObjectId("60acc54545c8e82e0475f73a")
+        title: Manzanas Royal Gala
+        description: Kilo de Manzanas
+        price: 359
+        thumbnail: sin imagen
+        code: testmongo
+        stock: 23
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: int
+          description: precio
+        thumbnail:
+          type: string
+          description: Imagen del producto
+        code:
+          type: String
+          description: codigo del producto
+        stock:
+          type: int
+          description: Stock del producto
+      example:
+        title: Producto de prueba
+        descripcion: Esto es una prueba
+        price: 500
+        thinbnail: sin imagen
+        code: test
+        stock: 23
+ 

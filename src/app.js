@@ -13,7 +13,19 @@ import passport from 'passport';
 import { config } from './config/config.js';
 import { middLog } from './utils.js';
 import {router as cartRouter} from './routes/cart.router.js'
+import swaggerUi from 'swagger-ui-express'
+import swagger_jsdoc from 'swagger-jsdoc'
 
+const options={
+    definition:{
+        openapi: '3.0.0',
+        info:{title: 'API ecomm',
+              version: '1.0.0',
+              description:'Documentacion del proyecto de la entrega de ecomm'}
+    },
+    apis:["./docs/*.yaml"]    
+}
+const specs = swagger_jsdoc(options)
 const PORT=config.PORT;
 
 const app=express();
@@ -22,6 +34,7 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'/views'));
 app.use('/products',productRouter)
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(specs))
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));

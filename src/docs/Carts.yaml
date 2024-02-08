@@ -1,0 +1,25 @@
+paths:
+  /api/cart/{cid}/products/{pid}:
+    post:
+      summary: Agrega un producto al carrito ya existente
+      tags:
+        - cart, product
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: id del prodcarrito al que se le desea agregar un prod nuevo
+        schema:
+          type: string 
+      - name: pid
+        in: path
+        required: true
+        description: id del producto que se desea agregar 
+        schema:
+          type: string     
+      responses:
+        "200":
+          description: Producto agregado
+        "400":
+          description: Info erronea o faltante
+ 

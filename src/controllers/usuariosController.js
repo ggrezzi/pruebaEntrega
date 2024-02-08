@@ -68,8 +68,6 @@ async function postUser(req, res){
             error:"Error inesperado", detalle:error.message
         })
     }
-
-
 }
 
 export default {getUsers, postUser, getUserById, getUserByEmail}
