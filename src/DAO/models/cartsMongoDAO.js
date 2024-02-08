@@ -21,6 +21,10 @@ export class CartsMongoDAO{
         return await productsModelo.find(filtro)
     }
 
+    async addProdToCart (cart_id,prod_id){
+        
+    }
+
     async create (cart){
         return await cartsModelo.create(cart)
     }

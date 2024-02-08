@@ -1,5 +1,4 @@
 import os from 'os'
-import fs from 'fs'
 export const validarProducto=(prod)=>{
 
     let {title, description,price, code, ...otros}=prod

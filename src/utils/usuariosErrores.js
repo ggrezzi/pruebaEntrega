@@ -1,5 +1,4 @@
 import os from 'os'
-import fs from 'fs'
 export const validaUsuario=(usuario)=>{
 
     let {nombre,apellido, email, edad, ...otros}=usuario
